@@ -1,0 +1,151 @@
+.wrapper {
+    width: 1024px;
+    margin: 0 auto;
+}
+
+.table__wrapper {
+    width: 700px;
+}
+
+.table__top-block {
+    position: relative;
+    margin-bottom: 15px;
+    padding: 0 5px;
+}
+
+.table__top-block__add-btn {
+    float: right;
+}
+
+.table {
+    width: 100%;
+    border-color: lightgrey;
+    text-align: center;
+}
+
+.button {
+    min-width: 60px;
+    margin: 5px 3px;
+}
+
+.table__name-head,
+.table__price-head {
+    position: relative;
+}
+
+.sort-btn-up {
+    background-color: transparent;
+    background-image: url('http://s7d5.scene7.com/is/image/CanadianTire/redesign_icons_sprite2?wid=80&hei=5011&fmt=png-alpha');
+    background-position: 0 -568px;
+    background-repeat: no-repeat;
+    width: 12px;
+    height: 12px;
+    top: 25%;
+    position: absolute;
+    right: 10px;
+}
+
+.sort-btn-down {
+    background-color: transparent;
+    background-image: url('http://s7d5.scene7.com/is/image/CanadianTire/redesign_icons_sprite2?wid=80&hei=5011&fmt=png-alpha');
+    background-position: 0 -512px;
+    background-repeat: no-repeat;
+    width: 12px;
+    height: 12px;
+    top: 25%;
+    position: absolute;
+    right: 10px;
+}
+
+.hidden-img {
+    display: none;
+}
+
+.table__name-cell__name {
+    float: left;
+    margin-left: 5px;
+}
+
+.table__name-cell__count {
+    display: inline-block;
+    float: right;
+    margin-right: 5px;
+}
+
+.modal__properties__wrapper,
+.modal__are-you-sure__wrapper {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: inline-block;
+    text-align: center;
+}
+
+.modal__overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: #000;
+    opacity: 0.7;
+    z-index: 1;
+}
+
+.modal-window {
+    position: relative;
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    z-index: 2;
+}
+
+.modal__are-you-sure__window {
+    top: 25%;
+    width: 350px;
+}
+
+.modal__properties__window {
+    top: 20%;
+    width: 356px;
+}
+
+.modal__are-you-sure__header {
+    width: 90%;
+    display: inline-block;
+    padding: 5px 0;
+    border-bottom: 1px solid silver;
+    font-weight: bold;
+}
+
+.modal__are-you-sure__body {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.modal__properties__close-btn {
+    position: absolute;
+    display: block;
+    top: 15px;
+    right: 15px;
+    height: 23px;
+    width: 34px;
+    font-weight: bold;
+    color: gray;
+}
+
+.modal__properties__form {
+    text-align: left;
+    padding: 15px;
+}
+
+.input-block {
+    margin: 15px 0;
+}
+
+.input-field {
+    width: 250px;
+}

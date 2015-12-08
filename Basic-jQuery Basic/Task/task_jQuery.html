@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Product Table</title>
+    <link rel="stylesheet" type="text/css" href="libs/css/style.css">
+    <script src="libs/js/jquery-2.1.4.js"></script>
+    <script src="task_jQuery.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <h2>Таблица с товарами</h2>
+
+        <div class="table__wrapper">
+            <div class="table__top-block">
+                <input type="text" class="table__top-block__search-field input-field"/>
+                <button class="table__top-block__search-btn">Search</button>
+                <button class="table__top-block__add-btn">Add New</button>
+            </div>
+
+            <table class="table" border="1" cellspacing="0">
+                <thead>
+                    <tr class="table__first-row">
+                        <th class="table__name-head">
+                            Name
+                            <a href="#" class="table__sort-name sort-btn sort-btn-down" style="display: none;"></a>
+                            <a href="#" class="table__sort-name sort-btn sort-btn-up"></a>
+                        </th>
+                        <th class="table__price-head">
+                            Price
+                            <a href="#" class="table__sort-price sort-btn sort-btn-down"></a>
+                            <a href="#" class="table__sort-price sort-btn sort-btn-up" style="display: none;"></a>
+                        </th>
+                        <th class="table__actions-head">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="table-body"></tbody>
+            </table>
+        </div>
+
+        <div class="modal__are-you-sure__wrapper" style="display: none;">
+            <div class="modal__overlay"></div>
+            <div class="modal__are-you-sure__window modal-window">
+                <div class="modal__are-you-sure__header">Are you sure?</div>
+                <div class="modal__are-you-sure__body">
+                    <p>Are you sure you want to delete this product?</p>
+                    <button class="modal__are-you-sure__yes-btn button">Yes</button>
+                    <button class="modal__are-you-sure__no-btn button">No</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal__properties__wrapper" style="display: none">
+            <div class="modal__overlay"></div>
+            <div class="modal__properties__window modal-window">
+                <button class="modal__properties__close-btn">&#10006</button>
+                <form class="modal__properties__form">
+                    <div class="input-block">
+                        <label>Name:</label><br/>
+                        <input type="text" class="modal__properties__name-field input-field"/>
+                    </div>
+                    <div class="input-block">
+                        <label>Supplier email:</label><br/>
+                        <input type="text" class="modal__properties__email-field input-field"/>
+                    </div>
+                    <div class="input-block">
+                        <label>Count:</label><br/>
+                        <input type="text" class="modal__properties__count-field input-field"/>
+                    </div>
+                    <div class="input-block">
+                        <label>Price:</label><br/>
+                        <input type="text" class="modal__properties__price-field input-field"/>
+                    </div>
+
+                    <button type="button" class="modal__properties__add-update-btn">Add/Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

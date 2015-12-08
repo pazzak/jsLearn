@@ -1,0 +1,32 @@
+.input-block {
+    display: inline-block;
+}
+
+.input-field {
+    width: 500px;
+}
+
+.task3 .input-field {
+    width: 150px;
+}
+
+.button-block {
+    margin-top: 20px;
+}
+
+.result-block {
+    max-width: 500px;
+    margin-top: 20px;
+}
+
+.result-block.task3 > li {
+    border: solid transparent 2px;;
+}
+
+.result-block.task3 > li:hover {
+    background-color: aliceblue;
+}
+
+.result-block.task3 > .result-element__selected {
+    border: solid cornflowerblue 2px;
+}

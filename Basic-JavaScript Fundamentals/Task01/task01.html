@@ -1,0 +1,26 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+	<script src="task01.js"></script>
+    <link rel="stylesheet" type="text/css" href="../clientlibs/css/style.css">
+
+	<title>JS Fundamentals - Task 01</title>
+</head>
+
+<body>
+	<h3>Тестовое задание 1</h3>
+	<p>Написать функцию для подсчета результата выражения. На вход приходит строка с выражением. Внутри выражения записываются вещественные числа (в качестве разделителя целой и дробной части используется точка), разделенные математическими операторами (+-*/). Между числом и оператором могут быть любые символы, кроме цифр и точек. В конце строки стоит знак «равно».</p>
+	<p>Результат выражения вычисляется последовательно. Приоритет операций не учитывается. Результат выводить с точностью до 2 знаков после запятой.</p>
+
+	<form class="form task1">
+		<label>Выражение: </label>
+		<input type="text" class="input-field" placeholder="3.5 землекопа +4 поросенка *10 рублей – 5.5 $ /5 человек ="/><br/>
+
+		<button type="button" onclick="activate()">Start</button>
+
+        <div class="result-block task1">
+            <label class="result_text"></label>
+        </div>
+	</form>
+</body>
+</html>

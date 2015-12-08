@@ -1,0 +1,44 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <script src="task03.js"></script>
+    <link rel="stylesheet" type="text/css" href="../clientlibs/css/style.css">
+
+    <title>JS Fundamentals - Task 03</title>
+</head>
+
+<body>
+    <h3>Тестовое задание 3</h3>
+    <p>Создать страницу HTML, позволяющую добавлять, удалять и изменять элементы ненумерованного списка.</p>
+
+    <div class="form task3">
+        <div class="input-block text">
+            <label>Text: </label>
+            <input type="text" class="input-field text"/>
+        </div>
+
+        <div class="input-block color">
+            <label>Color: </label>
+            <input type="text" class="input-field color"/>
+        </div>
+
+        <div class="input-block marker">
+            <label>Marker: </label>
+            <select class="input-field marker">
+                <option value="disc">disc</option>
+                <option value="circle">circle</option>
+                <option value="square">square</option>
+            </select>
+        </div>
+
+        <div class="button-block"></div>
+            <button type="button" onclick="createNewElement()">Create</button>
+            <button type="button" onclick="changeParameters()">Change current</button>
+            <button type="button" onclick="deleteElement()">Delete current</button>
+        </div>
+
+        <ul class="result-block task3">
+        </ul>
+    </div>
+</body>
+</html>
