@@ -56,6 +56,18 @@ public class AppController {
     }
 
     /*
+     * This method will delete existing employee.
+     */
+    @RequestMapping(value = { "/ajaxDelete" }, method = RequestMethod.POST)
+    public @ResponseBody boolean deleteEmployee(@RequestBody Employee employee, BindingResult result) {
+        if (result.hasErrors()) {
+            return false;
+        }
+        service.deleteEmployeeById(employee.getId());
+        return true;
+    }
+
+    /*
      * This method will provide the medium to add a new employee.
      */
     @RequestMapping(value = { "/new" }, method = RequestMethod.GET)

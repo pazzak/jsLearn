@@ -15,17 +15,20 @@ $(function() {
     var $blueprintRow;
     var selectorsArray;
 
+    var ajaxAddNewUnitUrl = '/ajaxNew';
+    var ajaxDeleteUnitUrl = '/ajaxDelete';
 
     (function initialize() {
         $registrationForm = $('.registration-form__wrapper');
-        $blueprintRow = $('.employees-card__blueprint-for-rows');
+        $overallWrapper = $('.employees');
+        $blueprintRow = $('.employees__blueprint-for-rows');
         selectorsArray = ['.id', '.first-name', '.last-name', '.birth-date', '.join-date', '.link-to-rm', '.link-to-pm', '.tech-list'];
 
-        $('.employees-card__register-button').click(showRegistrationForm);
+        $('.employees__register-button').click(showRegistrationForm);
         $('.registration-form__close-btn').click(hideRegistrationForm);
-        $blueprintRow.find('.employees-card__unit-edit-button').on('click', editEmployeeForm);
-        $blueprintRow.find('.employees-card__unit-delete-button').on('click', deleteRow);
-        $('.employees-card__add-unit-button').on('click', addNew);
+        $overallWrapper.find('.edit-button').on('click', editEmployeeForm);
+        $overallWrapper.find('.delete-button').on('click', deleteRow);
+        $('.employees__add-unit-button').on('click', addNew);
     }());
 
     function postJSON(url, data, callback) {
@@ -43,13 +46,12 @@ $(function() {
     }
 
     function getNewRow() {
-        return $blueprintRow.find('.employees-card__unit')[0].cloneNode(true);
+        return $blueprintRow.find('.employees__unit')[0].cloneNode(true);
     }
 
     function addNew() {
         var unit = {firstName : 'John', lastName : 'Smith', birthDate : '12-10-2014', joinDate : '13-10-2014',
             linkToRm : 'http://rm.ru', linkToPm : 'http://pm.ru', techList : 'tech list'};
-        var ajaxAddNewUnitUrl = '/ajaxNew';
 
         postJSON(ajaxAddNewUnitUrl, unit, showConsoleResult);
     }
@@ -70,7 +72,13 @@ $(function() {
     }
 
     function deleteRow(element) {
+        var row = element.currentTarget.parentElement.parentElement;
+        var id = row.dataset.id;
+        var unit = {id : id};
 
+        postJSON(ajaxDeleteUnitUrl, unit, function() {
+            row.remove();
+        });
     }
 
     function fillForm(data) {

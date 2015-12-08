@@ -3,7 +3,7 @@ body {
     margin: 0;
 }
 
-.employees-card__list__content-wrapper {
+.employees__list__content-wrapper {
     max-width: 1024px;
     width: 100%;
     margin: 0 auto;
@@ -13,12 +13,12 @@ body {
     background-color: #fff;
 }
 
-.employees-card__table {
+.employees__table {
     width: 100%;
     text-align: center;
 }
 
-.employees-card__table__header {
+.employees__table__header {
     background-color: #c6c6c6;
 }
 
