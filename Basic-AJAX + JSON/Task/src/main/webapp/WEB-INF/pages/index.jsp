@@ -42,7 +42,7 @@
             <div class="registration-form">
                 <button class="registration-form__close-btn">&#10006</button>
                 <h2>Registration Form</h2>
-                    <table data-id="id">
+                    <table>
                         <tr>
                             <td><label for="firstName">First Name: </label> </td>
                             <td><input type="text" class="first-name" id="firstName"/></td>

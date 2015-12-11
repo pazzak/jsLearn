@@ -1,28 +1,15 @@
-//var unitRow = $('#unit-row--blueprint');
-//
-//Unit.prototype = function() {
-//    var firstName,
-//        lastName,
-//        birthDate,
-//        joiningDate,
-//        linkToRm,
-//        linkToPm,
-//        technicalList
-//};
 $(function() {
 
-    var $registrationForm;
+    var regForm = {};
     var $blueprintRow;
-    var selectorsArray;
 
     var ajaxAddNewUnitUrl = '/ajaxNew';
     var ajaxDeleteUnitUrl = '/ajaxDelete';
 
     (function initialize() {
-        $registrationForm = $('.registration-form__wrapper');
-        $overallWrapper = $('.employees');
+        initRegistrationForm();
+        var $overallWrapper = $('.employees');
         $blueprintRow = $('.employees__blueprint-for-rows');
-        selectorsArray = ['.id', '.first-name', '.last-name', '.birth-date', '.join-date', '.link-to-rm', '.link-to-pm', '.tech-list'];
 
         $('.employees__register-button').click(showRegistrationForm);
         $('.registration-form__close-btn').click(hideRegistrationForm);
@@ -30,6 +17,25 @@ $(function() {
         $overallWrapper.find('.delete-button').on('click', deleteRow);
         $('.employees__add-unit-button').on('click', addNew);
     }());
+
+    function getUnitObject($wrapper) {
+        var unit = {};
+        unit.id = $wrapper[0].dataset.id;
+        unit.$firstName = $wrapper.find('.first-name')[0];
+        unit.$lastName = $wrapper.find('.last-name')[0];
+        unit.$birthDate = $wrapper.find('.birth-date')[0];
+        unit.$joinDate = $wrapper.find('.join-date')[0];
+        unit.$linkToRm = $wrapper.find('.link-to-rm')[0];
+        unit.$linkToPm = $wrapper.find('.link-to-pm')[0];
+        unit.$techList = $wrapper.find('.tech-list')[0];
+        return unit;
+    }
+
+    function initRegistrationForm() {
+        var $formWrapper = $('.registration-form__wrapper');
+        regForm = getUnitObject($formWrapper);
+        regForm.$wrapper = $formWrapper;
+    }
 
     function postJSON(url, data, callback) {
         return jQuery.ajax({
@@ -41,7 +47,10 @@ $(function() {
        });
     }
 
-    function editEmployeeForm() {
+    function editEmployeeForm(element) {
+        var $row = element.currentTarget.parentElement.parentElement;
+        var data = readRow($($row));
+        fillForm(data);
         showRegistrationForm();
     }
 
@@ -50,10 +59,10 @@ $(function() {
     }
 
     function addNew() {
-        var unit = {firstName : 'John', lastName : 'Smith', birthDate : '12-10-2014', joinDate : '13-10-2014',
+        var unit2 = {firstName : 'John', lastName : 'Smith', birthDate : '12-10-2014', joinDate : '13-10-2014',
             linkToRm : 'http://rm.ru', linkToPm : 'http://pm.ru', techList : 'tech list'};
 
-        postJSON(ajaxAddNewUnitUrl, unit, showConsoleResult);
+        postJSON(ajaxAddNewUnitUrl, unit2, showConsoleResult);
     }
 
     function showConsoleResult(dat) {
@@ -71,32 +80,62 @@ $(function() {
 
     }
 
-    function deleteRow(element) {
-        var row = element.currentTarget.parentElement.parentElement;
-        var id = row.dataset.id;
-        var unit = {id : id};
-
-        postJSON(ajaxDeleteUnitUrl, unit, function() {
-            row.remove();
-        });
-    }
-
-    function fillForm(data) {
-
-    }
-
-    function readForm() {
+    function readRow($row) {
         var data = {};
+        var unit = getUnitObject($row);
+
+        data.id = unit.id;
+        data.firstName = unit.$firstName.textContent || unit.$firstName.innerText;
+        data.lastName = unit.$lastName.textContent || unit.$lastName.innerText;
+        data.birthDate = unit.$birthDate.textContent || unit.$birthDate.innerText;
+        data.joinDate = unit.$joinDate.textContent || unit.$joinDate.innerText;
+        data.linkToRm = unit.$linkToRm.textContent || unit.$linkToRm.innerText;
+        data.linkToPm = unit.$linkToPm.textContent || unit.$linkToPm.innerText;
+        data.techList = unit.$techList.textContent || unit.$techList.innerText;
 
         return data;
     }
 
+    function deleteRow(element) {
+        var $row = element.currentTarget.parentElement.parentElement;
+        var id = $row.dataset.id;
+        var unit = {id : id};
+
+        postJSON(ajaxDeleteUnitUrl, unit, function() {
+            $row.remove();
+        });
+    }
+
+    function fillForm(data) {
+        regForm.id = data.id || '';
+        regForm.$firstName.value = data.firstName || '';
+        regForm.$lastName.value = data.lastName || '';
+        regForm.$birthDate.value = data.birthDate || '';
+        regForm.$joinDate.value = data.joinDate || '';
+        regForm.$linkToRm.value = data.linkToRm || '';
+        regForm.$linkToPm.value = data.linkToPm || '';
+        regForm.$techList.value = data.techList || '';
+    }
+
+    function readForm() {
+        var data = {};
+        data.id = regForm.id;
+        data.firstName = regForm.$firstName.value;
+        data.lastName = regForm.$lastName.value;
+        data.birthDate = regForm.$birthDate.value;
+        data.joinDate = regForm.$joinDate.value;
+        data.linkToRm = regForm.$linkToRm.value;
+        data.linkToPm = regForm.$linkToPm.value;
+        data.techList = regForm.$techList.value;
+        return data;
+    }
+
     function showRegistrationForm() {
-        $registrationForm.addClass('active');
+        regForm.$wrapper.addClass('active');
     }
 
     function hideRegistrationForm() {
-        $registrationForm.removeClass('active');
+        regForm.$wrapper.removeClass('active');
     }
 
 });
