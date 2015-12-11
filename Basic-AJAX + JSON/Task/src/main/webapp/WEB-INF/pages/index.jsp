@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <link rel="stylesheet" href="resources/css/style.css">
@@ -20,8 +21,12 @@
                         <tr class="employees__unit" data-id="${employee.id}">
                             <td class="employees__unit first-name">${employee.firstName}</td>
                             <td class="employees__unit last-name">${employee.lastName}</td>
-                            <td class="employees__unit birth-date">${employee.birthDate}</td>
-                            <td class="employees__unit join-date">${employee.joinDate}</td>
+                            <td class="employees__unit birth-date">
+                                <fmt:formatDate type="date" pattern="dd-MM-yyyy" value="${employee.birthDate}" />
+                            </td>
+                            <td class="employees__unit join-date">
+                                <fmt:formatDate type="date" pattern="dd-MM-yyyy" value="${employee.joinDate}" />
+                            </td>
                             <td class="employees__unit link-to-rm">${employee.linkToRm}</td>
                             <td class="employees__unit link-to-pm">${employee.linkToPm}</td>
                             <td class="employees__unit tech-list">${employee.techList}</td>
@@ -83,7 +88,6 @@
         </div>
 
         <div class="employees__blueprint-for-rows" style="display: none">
-            <c:import url="unit.html"/>
         </div>
     </div>
 </body>

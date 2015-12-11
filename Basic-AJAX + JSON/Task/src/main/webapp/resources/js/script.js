@@ -85,13 +85,13 @@ $(function() {
         var unit = getUnitObject($row);
 
         data.id = unit.id;
-        data.firstName = unit.$firstName.textContent || unit.$firstName.innerText;
-        data.lastName = unit.$lastName.textContent || unit.$lastName.innerText;
-        data.birthDate = unit.$birthDate.textContent || unit.$birthDate.innerText;
-        data.joinDate = unit.$joinDate.textContent || unit.$joinDate.innerText;
-        data.linkToRm = unit.$linkToRm.textContent || unit.$linkToRm.innerText;
-        data.linkToPm = unit.$linkToPm.textContent || unit.$linkToPm.innerText;
-        data.techList = unit.$techList.textContent || unit.$techList.innerText;
+        data.firstName = (unit.$firstName.textContent || unit.$firstName.innerText).trim();
+        data.lastName = (unit.$lastName.textContent || unit.$lastName.innerText).trim();
+        data.birthDate = (unit.$birthDate.textContent || unit.$birthDate.innerText).trim();
+        data.joinDate = (unit.$joinDate.textContent || unit.$joinDate.innerText).trim();
+        data.linkToRm = (unit.$linkToRm.textContent || unit.$linkToRm.innerText).trim();
+        data.linkToPm = (unit.$linkToPm.textContent || unit.$linkToPm.innerText).trim();
+        data.techList = (unit.$techList.textContent || unit.$techList.innerText).trim();
 
         return data;
     }
