@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="resources/css/style.css">
     <script src="resources/js/jquery-2.1.4.js"></script>
     <script src="resources/js/script.js"></script>
+    <link rel="import" href="<c:url value="/unit"/>">
     <title>Employees Card</title>
 </head>
 <body>
@@ -78,12 +79,12 @@
                         </tr>
                         <tr>
                             <td colspan="3">
-                                <button>Register</button>
+                                <button class="register-btn">Register</button>
+                                <button class="change-btn">Change</button>
                             </td>
                         </tr>
                     </table>
                 <br/>
-                Go back to <a href="#">List of All Employees</a>
             </div>
         </div>
 

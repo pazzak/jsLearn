@@ -83,8 +83,7 @@ public class AppController {
      * saving employee in database. It also validates the user input
      */
     @RequestMapping(value = { "/new" }, method = RequestMethod.POST)
-    public String saveEmployee(@Valid Employee employee, BindingResult result,
-                               ModelMap model) {
+    public String saveEmployee(@Valid Employee employee, BindingResult result, ModelMap model) {
 
         if (result.hasErrors()) {
             return "registration";
@@ -134,6 +133,14 @@ public class AppController {
     public String deleteEmployee(@PathVariable int id) {
         service.deleteEmployeeById(id);
         return "redirect:/list";
+    }
+
+    /*
+     * Returns an html blueprint for one unit in a table
+     */
+    @RequestMapping(value = { "/unit" }, method = RequestMethod.GET)
+    public String newUnit() {
+        return "unit";
     }
 
 }

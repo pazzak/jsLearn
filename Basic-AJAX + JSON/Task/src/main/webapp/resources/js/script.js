@@ -1,15 +1,15 @@
 $(function() {
 
     var regForm = {};
-    var $blueprintRow;
+    var blueprintRow;
 
-    var ajaxAddNewUnitUrl = '/ajaxNew';
-    var ajaxDeleteUnitUrl = '/ajaxDelete';
+    var AJAX_ADD_NEW_EMPLOYEE_URL = '/ajaxNew';
+    var AJAX_DELETE_EMPLOYEE_URL = '/ajaxDelete';
 
     (function initialize() {
         initRegistrationForm();
         var $overallWrapper = $('.employees');
-        $blueprintRow = $('.employees__blueprint-for-rows');
+        blueprintRow = $('.employees__blueprint-for-rows').find('.employees__unit')[0];
 
         $('.employees__register-button').click(showRegistrationForm);
         $('.registration-form__close-btn').click(hideRegistrationForm);
@@ -32,9 +32,8 @@ $(function() {
     }
 
     function initRegistrationForm() {
-        var $formWrapper = $('.registration-form__wrapper');
-        regForm = getUnitObject($formWrapper);
-        regForm.$wrapper = $formWrapper;
+        regForm.$wrapper = $('.registration-form__wrapper');
+        regForm = $.extend({}, regForm, getUnitObject(regForm.$wrapper));
     }
 
     function postJSON(url, data, callback) {
@@ -55,25 +54,25 @@ $(function() {
     }
 
     function getNewRow() {
-        return $blueprintRow.find('.employees__unit')[0].cloneNode(true);
+        return blueprintRow.cloneNode(true);
     }
 
     function addNew() {
         var unit2 = {firstName : 'John', lastName : 'Smith', birthDate : '12-10-2014', joinDate : '13-10-2014',
             linkToRm : 'http://rm.ru', linkToPm : 'http://pm.ru', techList : 'tech list'};
 
-        postJSON(ajaxAddNewUnitUrl, unit2, showConsoleResult);
+        postJSON(AJAX_ADD_NEW_EMPLOYEE_URL, unit2, showConsoleResult);
     }
 
     function showConsoleResult(dat) {
-        console.log("id: " + dat.id || 'empty');
-        console.log("firstName: " + dat.firstName || 'empty');
-        console.log("lastName: " + dat.lastName || 'empty');
-        console.log("birthDate: " + dat.birthDate || 'empty');
-        console.log("joiningDate: " + dat.joinDate || 'empty');
-        console.log("linkToRm: " + dat.linkToRm || 'empty');
-        console.log("linkToPm: " + dat.linkToPm || 'empty');
-        console.log("technicalList: " + dat.techList || 'empty');
+        console.log("id: " + dat && dat.id || 'empty');
+        console.log("firstName: " + dat && dat.firstName || 'empty');
+        console.log("lastName: " + dat && dat.lastName || 'empty');
+        console.log("birthDate: " + dat && dat.birthDate || 'empty');
+        console.log("joiningDate: " + dat && dat.joinDate || 'empty');
+        console.log("linkToRm: " + dat && dat.linkToRm || 'empty');
+        console.log("linkToPm: " + dat && dat.linkToPm || 'empty');
+        console.log("technicalList: " + dat && dat.techList || 'empty');
     }
 
     function addRow(data) {
@@ -101,20 +100,20 @@ $(function() {
         var id = $row.dataset.id;
         var unit = {id : id};
 
-        postJSON(ajaxDeleteUnitUrl, unit, function() {
+        postJSON(AJAX_DELETE_EMPLOYEE_URL, unit, function() {
             $row.remove();
         });
     }
 
     function fillForm(data) {
-        regForm.id = data.id || '';
-        regForm.$firstName.value = data.firstName || '';
-        regForm.$lastName.value = data.lastName || '';
-        regForm.$birthDate.value = data.birthDate || '';
-        regForm.$joinDate.value = data.joinDate || '';
-        regForm.$linkToRm.value = data.linkToRm || '';
-        regForm.$linkToPm.value = data.linkToPm || '';
-        regForm.$techList.value = data.techList || '';
+        regForm.id = data && data.id || '';
+        regForm.$firstName.value = data && data.firstName || '';
+        regForm.$lastName.value = data && data.lastName || '';
+        regForm.$birthDate.value = data && data.birthDate || '';
+        regForm.$joinDate.value = data && data.joinDate || '';
+        regForm.$linkToRm.value = data && data.linkToRm || '';
+        regForm.$linkToPm.value = data && data.linkToPm || '';
+        regForm.$techList.value = data && data.techList || '';
     }
 
     function readForm() {
@@ -135,6 +134,7 @@ $(function() {
     }
 
     function hideRegistrationForm() {
+        fillForm();
         regForm.$wrapper.removeClass('active');
     }
 
