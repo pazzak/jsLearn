@@ -33,6 +33,42 @@ public class AppController {
     MessageSource messageSource;
 
     /*
+     * This method add new employee.
+     */
+    @RequestMapping(value = { "/ajaxNew" }, method = RequestMethod.POST)
+    public @ResponseBody Employee newEmployee(@RequestBody Employee employee, BindingResult result) {
+        if (result.hasErrors()) {
+            return null;
+        }
+        service.saveEmployee(employee);
+        return employee;
+    }
+
+    /*
+     * This method will change data of existing employees.
+     */
+    @RequestMapping(value = { "/ajaxChange" }, method = RequestMethod.POST)
+    public @ResponseBody boolean changeEmployee(@RequestBody Employee employee, BindingResult result) {
+        if (result.hasErrors()) {
+            return false;
+        }
+        service.updateEmployee(employee);
+        return true;
+    }
+
+    /*
+     * This method will delete existing employee.
+     */
+    @RequestMapping(value = { "/ajaxDelete" }, method = RequestMethod.POST)
+    public @ResponseBody boolean deleteEmployee(@RequestBody Employee employee, BindingResult result) {
+        if (result.hasErrors()) {
+            return false;
+        }
+        service.deleteEmployeeById(employee.getId());
+        return true;
+    }
+
+    /*
      * This method will list all existing employees.
      */
     @RequestMapping(value = { "/" , "/list" }, method = RequestMethod.GET)
@@ -41,18 +77,6 @@ public class AppController {
         List<Employee> employees = service.findAllEmployees();
         model.addAttribute("employees", employees);
         return "index";
-    }
-
-    /*
-     * This method will list all existing employees.
-     */
-    @RequestMapping(value = { "/ajaxNew" }, method = RequestMethod.POST)
-    public @ResponseBody Employee listEmployees(@RequestBody Employee employee, BindingResult result) {
-        if (result.hasErrors()) {
-            return null;
-        }
-        service.saveEmployee(employee);
-        return employee;
     }
 
     /*
@@ -71,8 +95,7 @@ public class AppController {
      * saving employee in database. It also validates the user input
      */
     @RequestMapping(value = { "/new" }, method = RequestMethod.POST)
-    public String saveEmployee(@Valid Employee employee, BindingResult result,
-                               ModelMap model) {
+    public String saveEmployee(@Valid Employee employee, BindingResult result, ModelMap model) {
 
         if (result.hasErrors()) {
             return "registration";
@@ -122,6 +145,14 @@ public class AppController {
     public String deleteEmployee(@PathVariable int id) {
         service.deleteEmployeeById(id);
         return "redirect:/list";
+    }
+
+    /*
+     * Returns an html blueprint for one unit in a table.
+     */
+    @RequestMapping(value = { "/unit" }, method = RequestMethod.GET)
+    public String newUnit() {
+        return "unit";
     }
 
 }
