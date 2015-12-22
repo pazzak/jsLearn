@@ -1,15 +1,17 @@
 $(function() {
 
-    var regForm = {};
-    var blueprintRow;
-    var $rowToChange;
-    var $table;
+    var regForm = {},
+        blueprintRow,
+        $rowToChange,
+        $table,
+        oldIEBrowser;
 
     var AJAX_ADD_NEW_EMPLOYEE_URL = '/ajaxNew';
     var AJAX_CHANGE_EMPLOYEE_URL = '/ajaxChange';
     var AJAX_DELETE_EMPLOYEE_URL = '/ajaxDelete';
 
     (function initialize() {
+        oldIEBrowser = isIE7OrLower();
         initRegistrationForm();
         var $overallWrapper = $('.employees');
         blueprintRow = $('.employees__blueprint-for-rows').find('.employees__unit')[0];
@@ -19,6 +21,22 @@ $(function() {
         $overallWrapper.find('.edit-button').on('click', editEmployeeForm);
         $overallWrapper.find('.delete-button').on('click', deleteRow);
     }());
+
+    function initRegistrationForm() {
+        regForm.$wrapper = $('.registration-form__wrapper');
+        regForm.$registerBtn = regForm.$wrapper.find('.register-btn');
+        regForm.$changeBtn = regForm.$wrapper.find('.change-btn');
+
+        regForm = $.extend({}, regForm, getUnitObject(regForm.$wrapper));
+        regForm.$wrapper.find('.registration-form__close-btn').click(hideRegistrationForm);
+        regForm.$registerBtn.click(onRegisterBtnClick);
+        regForm.$changeBtn.click(onChangeBtnClick);
+    }
+
+    function isIE7OrLower() {
+        var isIE10OrLower = navigator.userAgent.search(/MSIE/) > -1;
+        return isIE10OrLower ? (navigator.userAgent.split("MSIE")[1]).split(";")[0] < 8 : false;
+    }
 
     function getUnitObject($wrapper) {
         var unit = {};
@@ -31,17 +49,6 @@ $(function() {
         unit.$linkToPm = $wrapper.find('.link-to-pm')[0];
         unit.$techList = $wrapper.find('.tech-list')[0];
         return unit;
-    }
-
-    function initRegistrationForm() {
-        regForm.$wrapper = $('.registration-form__wrapper');
-        regForm.$registerBtn = regForm.$wrapper.find('.register-btn');
-        regForm.$changeBtn = regForm.$wrapper.find('.change-btn');
-
-        regForm = $.extend({}, regForm, getUnitObject(regForm.$wrapper));
-        regForm.$wrapper.find('.registration-form__close-btn').click(hideRegistrationForm);
-        regForm.$registerBtn.click(onRegisterBtnClick);
-        regForm.$changeBtn.click(onChangeBtnClick);
     }
 
     function onRegisterBtnClick() {
